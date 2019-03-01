@@ -1,0 +1,49 @@
+{% load static %}
+<div class="wrapper">
+    <header>
+        <div>
+            {% if request.user.is_superuser %}
+                <div class="dash">
+                    <div class="event_counts">
+                        <a href="#" data-href="{% url 'news:dashboard_events' %}" class="btn btn-light events">
+                            <span class="btn__badge" id="tst"> </span>
+                            Dashboard</a>
+                    </div>
+                </div>
+            {% endif %}
+            <h1 class="text-header">
+                <div class="row">
+                    <div class="col-8"><h3>Welcome
+                        {% if request.user.get_full_name %}{{ request.user.get_full_name|capfirst }}{% endif %} at
+                        Reckless Angels MCC page</h3></div>
+                    <div class="col"><img class="pull-right img-responsive"
+                                          src="{% static 'club/images/logo_white.png' %}"></div>
+                </div>
+            </h1>
+        </div>
+        <nav>
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <div class="logo">
+                <div class="row">
+                    <img src="{% static 'club/images/logo_white.png' %}" alt="" class="logo-img">
+                    <h3 class="header-title">Reckless <br> Angels MCC</h3>
+                </div>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{% url 'news:post_list' %}">News</a></li>
+                    <li><a href="{% url 'about:about_us' %}">About us</a></li>
+                    <li><a href="{% url 'gallery:gallery_home' %}">Gallery</a></li>
+                    <li><a href="{% url 'music:music_home' %}">Music</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+</div>

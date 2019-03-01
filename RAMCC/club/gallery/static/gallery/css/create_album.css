@@ -1,0 +1,10 @@
+.create_album {
+    padding: 2%;
+}
+
+.create_form {
+    padding: 4%;
+    border: 1px solid #007bff;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.5);
+}

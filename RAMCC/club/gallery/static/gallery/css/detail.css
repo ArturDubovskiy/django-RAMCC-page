@@ -1,0 +1,32 @@
+.check li {
+    width: 16rem;
+    height: 13rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 2px solid saddlebrown;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5);
+    padding: 0.50rem;
+}
+
+.modal-content {
+    height: 40rem;
+}
+
+.output {
+    object-fit: fill;
+}
+
+.carousel-inner img {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle
+}
+
+.octicon {
+    fill: white;
+    position: fixed;
+    top: 50%;
+}

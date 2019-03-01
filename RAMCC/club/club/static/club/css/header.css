@@ -1,0 +1,197 @@
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: lighter;
+}
+
+header {
+    height: 50vh;
+    position: relative;
+    background: linear-gradient(
+            rgba(255, 153, 0, 0.2),
+            rgba(255, 153, 0, 0.2)
+    ),
+    url(http://www.death-panthers-mc.de/fileadmin/templates/dpmc/bilder/bg/bg_08.jpg) no-repeat 50% 50%;;
+    /*background: url(https://static8.depositphotos.com/1039762/932/i/950/depositphotos_9320285-stock-photo-bikes.jpg) no-repeat 50% 50%;*/
+    background-size: cover;
+}
+
+.logo {
+    height: 88%;
+    position: absolute;
+    float: left;
+    margin: 9px 50px;
+    border-right: 5px solid white;
+    border-bottom-left-radius: 45px;
+    border-top-left-radius: 45px;
+
+}
+
+nav {
+    position: fixed;
+    width: 71.2em;
+    top: 0;
+    line-height: 60px;
+    z-index: 9;
+}
+
+nav ul {
+    line-height: 60px;
+    list-style: none;
+    background: rgba(0, 0, 0, 0);
+    overflow: hidden;
+    color: #fff;
+    padding: 0;
+    text-align: right;
+    margin: 0;
+    padding-right: 40px;
+    transition: 1s;
+}
+
+nav.black ul {
+    background: #000;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 16px 40px;;
+}
+
+nav ul li a {
+    font-family: 'Righteous', cursive;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: #fff;
+    font-size: 1.3em;
+
+}
+
+.menu a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+.menu-icon {
+    line-height: 60px;
+    width: 100%;
+    background: #000;
+    text-align: right;
+    box-sizing: border-box;
+    padding: 15px 24px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+
+@media (max-width: 786px) {
+
+    .logo {
+        position: fixed;
+        top: 0;
+        margin-top: 16px;
+    }
+
+    nav ul {
+        max-height: 0px;
+        background: #000;
+    }
+
+    nav.black ul {
+        background: #000;
+    }
+
+    .showing {
+        max-height: 34em;
+    }
+
+    nav ul li {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 24px;
+        text-align: center;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+}
+
+.logo-img {
+    height: 75px;
+}
+
+.container {
+    padding: 0;
+}
+
+.header-title {
+    color: white;
+    font-size: 28px;
+    padding: 8px;
+    text-shadow: black 0 0 6px;
+    font-family: 'Black Ops One', cursive;
+    margin-right: 20px;
+}
+
+.text-header {
+    color: white;
+    position: absolute;
+    bottom: 5%;
+    left: 26%;
+    right: 5%;
+    background: rgba(255, 255, 255, 0.3);
+    border-right: 10px solid white;
+    border-bottom-left-radius: 40px;
+    text-shadow: black 0 0 6px;
+    font-family: 'Black Ops One', cursive;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.text-header img {
+    font-size: 1.8em;
+    height: 3em;
+}
+
+.text-header h3 {
+    padding-top: 30px;
+    font-size: 1em;
+
+}
+
+.dash {
+    position: absolute;
+    right: 5%;
+    top: 22%;
+}
+
+.dash a {
+    position: relative;
+    width: 150px;
+    background-color: white;
+    font-family: 'Ranga', cursive;
+    color: rgba(188, 139, 50, 0.8);
+    padding-right: 2%;
+    font-size: 20px;
+    right: 5%;
+    top: 22%;
+}
+
+.dash a:hover {
+    border: 1px solid sandybrown;
+    background-color: white;
+    color: rgba(188, 139, 50, 1);
+}
+
+.btn__badge {
+    background-color: #fa3e3e;
+    border-radius: 2px;
+    padding: 0 5%;
+    font-size: 18px;
+    color: white;
+    position: absolute; /* Position the badge within the relatively positioned button */
+    top: 0;
+    right: 0;
+    width: 23px;
+    height: 23px;
+}

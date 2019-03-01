@@ -1,0 +1,39 @@
+{% load crispy_forms_filters %}
+{% load octicons %}
+<div class="row">
+    <div class="col-12 content_section">
+    <p>Comments: </p>
+        {% for comment in comments %}
+            <blockquote class="blockquote">
+                <p class="mb-0">{{ comment.content }}</p>
+                <footer class="blockquote-footer">{% firstof comment.user.get_full_name comment.user %}
+                    | {{ comment.created|timesince }} ago | <span class="reply"
+                                                                  data-id="{{ comment.id }}"> {% octicon "reply" %} Reply </span>
+                </footer>
+            {% if request.user.is_staff or request.user == comment.user%}
+                <a class="btn btn-light float-right" href="{% url 'news:comment_delete' slug=detail.slug id=comment.id %}">{% octicon "trashcan" %}</a>
+                <br>
+            {% endif %}
+                {% for chield in comment.children %}
+                    <blockquote class="blockquote reply">
+                        <p class="mb-0">{{ chield.content }}</p>
+                        <footer class="blockquote-footer">{% firstof chield.user.get_full_name chield.user %}
+                            | {{ chield.created|timesince }} ago
+                        </footer>
+                    </blockquote>
+                {% endfor %}
+                <div class="replies{{ comment.id }}">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                        <input type="submit" value="Send" class="btn btn-dark">
+                    </form>
+                </div>
+            </blockquote>
+            <hr>
+        {% endfor %}
+    </div>
+</div>
+
+

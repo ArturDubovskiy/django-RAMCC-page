@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Albums
+{% endblock %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'gallery/css/index.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="wrap_content">
+        <div class="row">
+            <div class="col-12">
+                <h3>Albums</h3>
+                <hr>
+                <a href="{% url 'gallery:create_gallery_album' %}" class="btn btn-dark">Create album</a>
+                <hr>
+            </div>
+            {% if albums %}
+                {% for album in albums %}
+                    <div class="col-4">
+                        <div class="thumbnail album_item">
+                            <div class="album_img">
+                                <a href="{% url 'gallery:album_detail' album.slug %}">
+                                    <img src="{{ album.album_logo.url }}" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="caption">
+                                <hr>
+                                <h2>{{ album.album_title }}</h2>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+                {% endfor %}
+            {% else %}
+                <h1>No albums yet</h1>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

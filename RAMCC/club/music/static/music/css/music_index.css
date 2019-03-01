@@ -1,0 +1,32 @@
+.album_img img {
+    width: 100%;
+    overflow: hidden;
+}
+
+.album_img {
+    height: 20em;
+    overflow: hidden;
+    border-radius: 15px;
+    vertical-align: middle;
+}
+
+.album_item {
+    padding: 2%;
+    border: 2px solid #007bff;
+    background: rgba(66, 134, 244,0.1);
+    border-radius: 10px;
+
+}
+
+.album_item h2 {
+    color: dimgrey;
+    font-family: 'Unlock', cursive;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em whitesmoke;
+}
+
+.album_item h4 {
+    text-align: right;
+    color: #838587;
+      font-family: 'Unlock', cursive;
+}

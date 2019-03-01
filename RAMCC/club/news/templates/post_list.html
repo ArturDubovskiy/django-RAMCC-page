@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% load octicons %}
+
+{% block title %}
+    News
+{% endblock %}
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'news/css/news.css' %}">
+{% endblock %}
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="wrap_content">
+        {% include "messages.html" %}
+        <form action="" method="GET">
+            <div class="row my_custom">
+                <div class="col">
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'news:post_create' %}" class="btn btn-light">Create post</a>
+                    {% else %}
+                        <h3 class="anon_text">Log in to add post</h3>
+                    {% endif %}
+                </div>
+                <div class="col-4">
+                    <div class="input-group input">
+                        <input class="form-control " type="text" name="search" placeholder="Search..."
+                               value="{{ request.GET.search }}"/>
+                        <button class="btn btn-light" type="submit">{% octicon "search" %}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+
+        {# Post list #}
+        {% for post in posts %}
+            <div class="post_items">
+                <div class="row">
+                    <div class="col">
+                        <a class="padd" href="{{ post.get_absolute_url }}">{{ post.title|capfirst }}</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="row oct-icons justify-content-end icon-counts">
+                    <div class="col date">
+                       Created by {% firstof post.author.get_full_name post.author %} | {{ post.created|timesince }} ago
+                    </div>
+                    <div class="col-auto">
+                        {% octicon "eye" %}  <h1>{{ post.views }}</h1>
+                    </div>
+                    <div class="col-auto">
+                        {% octicon "comment" %}  <h1>{{ post.comments.count }}</h1>
+                    </div>
+                    <div class="col-auto align-right">
+                        {% octicon "heart" %}  <h1>{{ post.likes.count }}</h1>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    {% if post.image %}
+                        <div class="col-5 post-item-img-col">
+                            <img src="{{ post.image.url }}" class="img-fluid post-img" alt="Responsive image"/>
+                        </div>
+                    {% endif %}
+                    <div class="col text-justify post-item-text">
+                        <h2>{{ post.context|linebreaks|truncatechars:300 }}</h2>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col text-right"><a href="{{ post.get_absolute_url }}">Read more ...</a></div>
+                </div>
+                <hr/>
+            </div>
+        {% empty %}
+            <h1>Sorry no posts there</h1>
+        {% endfor %}
+        {% include "pagination.html" %}
+    </div>
+{% endblock %}
+
+

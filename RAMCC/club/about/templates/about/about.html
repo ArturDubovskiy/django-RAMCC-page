@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load octicons %}
+
+<script>
+  {% block jquery %}
+    $(".show-join-form").click(() => {
+      $(".join_form").toggle(500);
+    });
+  {% endblock %}
+</script>
+
+
+{% block styles %}
+    <link rel="stylesheet" href='{% static "about/css/about.css" %}'>
+{% endblock %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+
+{% block content %}
+    {% include 'messages.html' %}
+    <div class="wrap_content">
+        <div class="row about_page">
+            <div class="col-4 img-section">
+                <h1>Valeriy Ivanishin</h1>
+                <h2>Founder and leader</h2>
+                <hr>
+                <img class="img-responsive header_img" src="{% static "about/images/C__fakepath_Head_clan.png" %}"
+                     alt="Responsive image">
+            </div>
+            <div class="col-8 text-section">
+                <h1> This organization is a non-profit, non-political, non-religious. The organization brings together
+                    in its ranks on a voluntary basis lovers of motorcycles (motorcycles, scooters, mopeds and ATV). The
+                    Falcons Moto Club is open to a wide range of people (including people with disabilities) who have a
+                    legal motorcycle, the appropriate driver's category, or who want to become the owner of the right
+                    motorcycle category in the future and finally realize themselves in this movement.
+                    <br>
+                </h1>
+                Targets and activity:
+                <ul>
+                     <li>The unification of people close in spirit and interests to motorcycle trips and love to motorcycles,
+                    wishing to realize themselves in this movement;
+                     <li>Support for people with disabilities who are interested in motorcycles and want to participate in
+                    the development of motorcycle movements;
+                     <li>Maintenance, repair, tuning and construction of motorcycles, exchange of experience;
+                    Propaganda of the motor movement culture and the formation of a positive public opinion about its
+                    representatives;
+                     <li>Promotion of Ukrainian cultural heritage;
+                     <li>Organization of motor races, events, rallies;
+                     <li>Making a contribution to the national Ukrainian culture of motorsport;
+                     <li>Cooperation with other motor clubs;
+                     <li>Support for motorcyclists on trips, runs and other activities;
+                     <li>Cooperation with the legislature of the Ukraine or any other country in which the club
+                    members are staying;
+                     <li>Cultural, social, scientific, educational, charitable and other purposes;
+                     <li>Formation of the general culture of the individual, the adaptation of the individual to life in
+                    society;
+                     <li>Creating the basis for the informed choice and development of professional motorcycle management
+                    skills;
+                     <li>Promotion of competent and trouble-free driving. The study and compliance with the rules of the
+                    road. Mutual aid on the road;
+                     <li>The implementation of other activities not prohibited by applicable law and aimed at achieving
+                    statutory goals and objectives ..
+                </ul>
+            </div>
+        </div>
+        <div class="text-right about_btn">
+            <button type="submit" class="btn btn-light show-join-form">Join us!</button>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 join_form about_btn">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-light">Send</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            {% include 'messages.html' %}
+        </div>
+    </div>
+{% endblock %}

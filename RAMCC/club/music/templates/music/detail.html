@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ album.album_title }}
+{% endblock %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'music/css/music_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-5 album_img">
+            <a href="{% url 'music:song_detail' album.slug %}">
+                {% if album.album_logo %}
+                    <img src="{{ album.album_logo.url }}" class="img-responsive">
+                {% else %}
+                    <h3>No image to display</h3>
+                {% endif %}
+            </a>
+            <h1>{{ album.album_title }}
+            </h1>
+        </div>
+        <div class="col">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="{% url 'music:song_detail' album.slug %}">View All</a>
+                </li>
+                <pre> </pre><li role="presentation"><a href="{% url 'music:add_song' album.slug %}">Add New Song</a></li>
+            </ul>
+            <hr>
+            <div class="list">
+                <h3>All Songs</h3>
+                {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th id="th_title">Title</th>
+                        <th id="th_file">Audio File</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                </table>
+                {% for song in album.song_set.all %}
+                    <table class="table songs-table">
+                    <tr>
+                        <td id="song-title">{{ song.song_title }}</td>
+                        <td>
+                            <a target="_blank" href="{{ song.audio_file.url }}">
+                                <button type="button" class="btn btn-success btn-xs">Play
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <form action="{% url 'music:delete_song' album.slug song.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                <button type="submit" class="btn btn-danger btn-xs">Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

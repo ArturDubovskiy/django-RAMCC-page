@@ -1,0 +1,32 @@
+.footer {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: black;
+    width: inherit;
+    padding: 1% 0;
+    margin-left: 0;
+}
+
+.footer img {
+    height: 60px;
+
+}
+
+.footer h3 {
+    color: white;
+    display: inline-block;
+    font-family: 'Black Ops One', cursive;
+    padding-left: 3%;
+    padding-top: 3%;
+}
+
+.footer h5 {
+    color: white;
+    font-size: 1em;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.octicon-device-mobile {
+    fill: white;
+}

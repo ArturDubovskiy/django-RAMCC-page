@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background: linear-gradient(
+                    rgba(255, 153, 0, 0.2),
+                    rgba(255, 153, 0, 0.2)
+            ),
+            url("{% static 'user_auth/images/BG_IMG.jpg' %}") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-6 center-block text-center forms_auth">
+            <h1 class="knockout">{{ title }}</h1>
+            <hr>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="login_form">
+                    {{ form|crispy }}
+                </div>
+                <br>
+                <hr>
+                <input type="submit" class="btn btn-dark btn-login" value="{{ title }}">
+                <input type="button" class="btn btn-dark btn-login" value="Register"
+                       onclick="location.href='{% url 'register' %}'">
+            </form>
+        </div>
+    </div>
+{% endblock %}

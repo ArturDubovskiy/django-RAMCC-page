@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load octicons %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    {{ detail.title }}
+{% endblock %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'news/css/detail.css' %}">
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+<script>
+  {% block jquery %}
+    const updateText = (btn, newCount, verb, counter) => {
+      btn.attr("data-likes", newCount);
+      btn.text(verb);
+      counter.text(newCount);
+    };
+
+    $(".like-btn").click((e) => {
+      e.preventDefault();
+      let this_ = $(".like-btn");
+      let likeURL = this_.attr("data-href");
+      let likeCount = parseInt(this_.attr("data-likes"));
+      let counter = $(".counter");
+      $.ajax({
+        url: likeURL,
+        method: "GET"
+      }).done((data) => {
+        console.log(data);
+        let newLike;
+        if (data.liked) {
+          let newLike = likeCount + 1;
+          updateText(this_, newLike, "Unlike", counter);
+        } else {
+          let newLike = likeCount - 1;
+          updateText(this_, newLike, "Like", counter);
+        }
+      }).fail((error) => {
+        console.log(error);
+        console.log("error");
+      })
+    });
+
+    {#  Comments #}
+    if ($(".comments").is(":hidden") === true) {
+      $("#comments").val("Show comments")
+    }
+    else {
+      $("#comments").val("Hide comments")
+    }
+    $("#comments").click(() => {
+      if ($(".comments").is(":hidden") === true) {
+        $(".comments").show();
+        $("#comments").val("Hide comments");
+      }
+      else {
+        $(".comments").hide();
+        $("#comments").val("Show coments");
+      }
+    });
+
+    elements = document.querySelectorAll(".reply");
+    elements.forEach((el, i) => {
+      const element = el;
+      const id = element.getAttribute("data-id");
+      $(".replies" + id).hide();
+      element.onclick = () => {
+        comment = $(".replies" + id);
+        comment.toggle(500)
+      }
+    });
+  {% endblock %}
+</script>
+
+
+{% block content %}
+    {# Message section #}
+    {% include "messages.html" %}
+
+
+    {# Page content#}
+    <div class="wrap_content">
+        <div class="my_custom">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'news:post_update' slug=detail.slug %}" class="btn btn-light">Edit post</a>
+            {% endif %}
+            {% if request.user.is_staff or request.user == detail.author %}
+                <a href="{% url 'news:post_delete' slug=detail.slug %}" class="btn btn-light">Delete post</a>
+            {% endif %}
+        </div>
+        <hr>
+        <div class="post-item">
+            <div class="justify-content-center custom row">
+                <div class="col-12">
+                    <h1>{{ detail.title }}</h1>
+                </div>
+            </div>
+            <hr>
+            <div class="row oct-icons icon-counts">
+                <div class="col-auto date">
+                    <h3>Created {{ detail.created|timesince }} ago
+                        by {% firstof detail.author.get_full_name detail.author %}</h3>
+                </div>
+                <div class="col-auto align-left">
+                    {% octicon "eye" %} <h1>{{ detail.views }}</h1>
+                </div>
+                <div class="col align-left">
+                    {% octicon "comment" %} <h1>{{ detail.comments.count }}</h1>
+                </div>
+                <div class="col-auto likes">
+                    {% octicon "heart" %}
+                    <span class="counter">{{ detail.likes.count }}</span>
+                    <a class="like-btn btn btn-info"
+                       data-href="{{ detail.get_like_api_url }}"
+                       data-likes="{{ detail.likes.count }}"
+                       href="{{ detail.get_like_url }}">Like</a>
+                </div>
+            </div>
+            <hr>
+            {% if detail.image %}
+                <div class="row">
+                    <div class="col text-center">
+                        <img src="{{ detail.image.url }}" class="img-fluid image-item-detail"/>
+                    </div>
+                </div>
+            {% endif %}
+            <hr>
+            <div class="text_area row">
+                <div class="col-12">
+                    <h3>{{ detail.context|linebreaks }}</h3>
+                </div>
+            </div>
+        </div>
+        <hr>
+            <p class="com_text">Comments</p>
+        <hr>
+        {# Comments  #}
+        {% if request.user.is_authenticated %}
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <input type="submit" value="Comment" class="btn btn-light btn_custom">
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <p>You must <a href="{% url 'login' %}">login</a> first, to leave a comment.</p>
+        {% endif %}
+        {% if detail.comments.count != 0 %}
+            <hr>
+            <input type="submit" value="Show" id="comments" class="btn btn-light btn_toggler"/>
+            <div class="comments">
+                {% include "comments.html" %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

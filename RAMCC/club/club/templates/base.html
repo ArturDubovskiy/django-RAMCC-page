@@ -1,0 +1,60 @@
+{% load static %}
+{% load octicons %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    {# Styles #}
+    {% include 'styles.html' %}
+    {% block styles %}
+    {% endblock %}
+</head>
+
+<body>
+<div class="container">
+    {# Header #}
+    {% block header %}
+    {% endblock %}
+    <br>
+    {# Content #}
+    {% block content %}
+    {% endblock %}
+    {# Footer #}
+    {% block footer %}
+    {% endblock %}
+
+    {# Scripts#}
+    {% include 'js.html' %}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/header.js' %}"></script>
+    <script>
+      $('.logo').hide();
+      $(document).ready(() => {
+        {% block jquery %}{% endblock %}
+
+        $(".menu-icon").on("click", function () {
+          $("nav ul").toggleClass("showing");
+        });
+
+        // Scrolling Effect
+        $(window).on("scroll", function () {
+          if ($(window).scrollTop()) {
+            $('nav').addClass('black');
+            $('.logo').show();
+          }
+          else {
+            $('nav').removeClass('black');
+            $('.logo').hide();
+          }
+
+        })
+      })
+    </script>
+</div>
+</body>
+</html>

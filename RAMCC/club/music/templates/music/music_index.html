@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Albums
+{% endblock %}
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'music/css/music_index.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h3>Albums</h3>
+            <hr>
+            <a href="{% url 'music:create_album' %}" class="btn btn-dark">Create album</a>
+            <hr>
+        </div>
+        {% if albums %}
+            {% for album in albums %}
+                <div class="col-4">
+                    <div class="thumbnail album_item">
+                        <div class="album_img">
+                            <a href="{% url 'music:song_detail' album.slug %}">
+                                <img src="{{ album.album_logo.url }}" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="caption">
+                            <h2>{{ album.album_title }}</h2>
+                            <h4>Artist:{{ album.artist }}</h4>
+                            <h4>Genre: {{ album.genre }}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'music:song_detail' album.slug %}" class="btn btn-primary btn-sm"
+                               role="button">View
+                                Details</a>
+
+                            <!-- Delete Album -->
+                            {% if request.user.is_authenticated or reqeust.user.is_staff and request.user == album.user %}
+                            <form action="{% url 'music:album_delete' album.slug %}" method="post"
+                                  style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ album.slug }}"/>
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <h1>No albums yet</h1>
+        {% endif %}
+    </div>
+{% endblock %}

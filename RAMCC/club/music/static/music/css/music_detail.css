@@ -1,0 +1,47 @@
+.album_img img {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #007bff;
+}
+
+.album_img h1 {
+    font-family: 'Unlock', cursive;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em whitesmoke;
+}
+
+.nav-pills li {
+    font-size: 1.6em;
+    background: #e6e9f0;
+    padding: 2%;
+    border-radius: 20px;
+    border: 2px solid #007bff;
+    width: 45%;
+    text-align: center;
+    display: inline-block;
+}
+
+.table {
+    background: rgba(66, 134, 244, 0.3);
+    border-radius: 10px;
+}
+
+.table td {
+    width: 20%
+}
+
+#th_title {
+    width: 50%;
+}
+
+.songs-table {
+    background: rgba(66, 134, 244, 0.15);
+    border-radius: 10px;
+}
+
+#song-title {
+    font-size: 1.3em;
+    font-family: 'Comfortaa', cursive;
+    width: 40%;
+
+}

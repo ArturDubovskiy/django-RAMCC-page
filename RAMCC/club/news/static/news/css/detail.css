@@ -1,0 +1,114 @@
+.my_custom a {
+    margin-top: 1.1%;
+    margin-left: 2.7%;
+    background-color: rgba(216, 188, 138, 0.3);
+    font-family: 'Ranga', cursive;
+    font-size: 1.5em;
+    color: rgba(188, 139, 50, 0.8);
+}
+
+.my_custom a:hover {
+    border: 1px solid sandybrown;
+    background-color: white;
+    color: rgba(188, 139, 50, 1);
+
+}
+
+.post-item {
+    word-wrap: break-word;
+    padding: 2%;
+    margin: 4px;
+    border: 3px double wheat;
+    text-align: justify;
+    border-top-left-radius: 45px;
+    border-bottom-right-radius: 45px;
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+    margin-bottom: 2%;
+}
+
+.post-item h1 {
+    font-family: 'Fredericka the Great', cursive;
+    /* font-family: 'Lobster', cursive; */
+    font-size: 2.4em;
+    color: black;
+}
+
+.date {
+    color: #9b9b9b;
+    font-family: 'Ranga', cursive;
+    font-size: 1.5em;
+}
+
+.oct-icons .octicon-heart {
+    fill: darkred;
+}
+
+.oct-icons .octicon {
+    height: 1.5em;
+    width: 1.5em;
+    display: inline;
+    text-align: center;
+}
+
+.icon-counts h1 {
+    font-size: 18px;
+    font-family: Arial,cursive;
+    display: inline;
+}
+
+.like-btn {
+    width: 7em;
+}
+
+.com_text {
+    text-align: center;
+    font-family: Muli, cursive;
+    font-size: 1.4em;
+}
+
+.text_area {
+    font-family: 'Cormorant', serif;
+    word-wrap: break-word;
+    border-radius: 10px;
+    background-color: rgba(199,141,35,0.1);
+    padding: 10px;
+    margin: 0 2%;
+}
+
+.btn_custom {
+    background-color: rgba(216, 188, 138, 0.3);
+    font-family: 'Ranga', cursive;
+    font-size: 1.5em;
+    color: rgba(188, 139, 50, 0.8);
+    text-shadow: wheat 0 0 1px;
+    margin: 0 35%;
+    width: 30%;
+}
+
+.btn_custom:hover {
+    border: 1px solid sandybrown;
+    background-color: white;
+    color: rgba(188, 139, 50, 1);
+}
+
+.counter {
+    margin-right: 2%;
+}
+
+.btn_toggler {
+    background-color: rgba(216, 188, 138, 0.3);
+    font-family: 'Ranga', cursive;
+    font-size: 1.5em;
+    color: rgba(188, 139, 50, 0.8);
+    text-shadow: wheat 0 0 1px;
+}
+
+.btn_toggler:hover {
+    border: 1px solid sandybrown;
+    background-color: white;
+    color: rgba(188, 139, 50, 1);
+}
+
+.likes {
+    display: inline;
+}
